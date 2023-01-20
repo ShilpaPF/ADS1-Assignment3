@@ -29,7 +29,9 @@ plt.title('CO2 Emission in 2005', fontdict={'fontsize': 17, 'weight': 'bold'})
 # Plot the Pie Chart for Displaying CO2 Emission in 2019
 plt.subplot(1, 2, 2)
 plt.pie(data_2019['2019'], labels=data_2019['Country Name'], autopct='%1.1f%%')
+#Setting the Title
 plt.title('CO2 Emission in 2019', fontdict={'fontsize': 17, 'weight': 'bold'})
+#Saving Figure
 plt.savefig("pie.png",bbox_inches="tight")
 plt.show()
 # create a list of countries
@@ -51,11 +53,14 @@ for country in countries:
 
 # Set the x-limits
 plt.xlim('2012', '2019')
+#Setting the Labels
 plt.xlabel("Year")
 plt.ylabel("CO2 Emission(kt)")
 # Add a legend
 plt.legend()
+#Saving the Figure
 plt.savefig("line.png",bbox_inches="tight")
+#Setting Title
 plt.title("Visualisation:CO2 Emission based on Years")
 # Show the plot
 plt.show()
@@ -77,8 +82,10 @@ plt.bar(x_pos, year_2003, bottom=year_1990, color='red', label='2003')
 plt.xticks(x_pos, country)
 plt.xlabel('Year')
 plt.ylabel('CO2 Emissions(kt)')
+#Setting Title
 plt.title('Stacked Bar Graph')
 plt.legend()
+#Saving the Figure
 plt.savefig("bar.png",bbox_inches="tight")
 
 # Display the graph
@@ -90,10 +97,12 @@ X = df[['2013', '2014', '2015', '2016', '2017', '2018', '2019']]
 kmeans = KMeans(n_clusters=4, random_state=0).fit(X)
 labels = kmeans.labels_
 
-# Visualize data
+# Visualize data using scattering method
 sns.pairplot(df, hue='Country Name', palette='husl', diag_kind='hist')
 plt.scatter(X.iloc[:, 0], X.iloc[:, 1], c=labels, cmap='rainbow')
+#Setting the labels
 plt.xlabel('Yearwise CO2 Emission(kt)')
 plt.ylabel('Yearwise CO2 Emission(kt)')
+#Setting The Title
 plt.title('CO2 Clustering')
 plt.show()
