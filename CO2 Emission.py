@@ -30,6 +30,7 @@ plt.title('CO2 Emission in 2005', fontdict={'fontsize': 17, 'weight': 'bold'})
 plt.subplot(1, 2, 2)
 plt.pie(data_2019['2019'], labels=data_2019['Country Name'], autopct='%1.1f%%')
 plt.title('CO2 Emission in 2019', fontdict={'fontsize': 17, 'weight': 'bold'})
+plt.savefig("pie.png",bbox_inches="tight")
 plt.show()
 # create a list of countries
 countries = df['Country Name'].unique()
@@ -54,7 +55,8 @@ plt.xlabel("Year")
 plt.ylabel("CO2 Emission(kt)")
 # Add a legend
 plt.legend()
-plt.title("Visualisation ")
+plt.savefig("line.png",bbox_inches="tight")
+plt.title("Visualisation:CO2 Emission based on Years")
 # Show the plot
 plt.show()
 # Creating the array for 4 countries
@@ -77,7 +79,21 @@ plt.xlabel('Year')
 plt.ylabel('CO2 Emissions(kt)')
 plt.title('Stacked Bar Graph')
 plt.legend()
+plt.savefig("bar.png",bbox_inches="tight")
 
 # Display the graph
 plt.show()
+# Select columns to use for Clustering
+X = df[['2013', '2014', '2015', '2016', '2017', '2018', '2019']]
 
+# Create K-Means Clustering model
+kmeans = KMeans(n_clusters=4, random_state=0).fit(X)
+labels = kmeans.labels_
+
+# Visualize data
+sns.pairplot(df, hue='Country Name', palette='husl', diag_kind='hist')
+plt.scatter(X.iloc[:, 0], X.iloc[:, 1], c=labels, cmap='rainbow')
+plt.xlabel('Yearwise CO2 Emission(kt)')
+plt.ylabel('Yearwise CO2 Emission(kt)')
+plt.title('CO2 Clustering')
+plt.show()
